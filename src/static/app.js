@@ -40,27 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const safeDescription = escapeHtml(details.description);
         const safeSchedule = escapeHtml(details.schedule);
         const participantCount = details.participants.length;
-        const participantsMarkup = details.participants.length
-          ? details.participants
-              .map(
-                (participant) => `
-                  <li class="participant-item">
-                    <span class="participant-email">${escapeHtml(participant)}</span>
-                    <button
-                      type="button"
-                      class="participant-delete"
-                      data-activity="${safeName}"
-                      data-email="${escapeHtml(participant)}"
-                      aria-label="Unregister ${escapeHtml(participant)} from ${safeName}"
-                      title="Unregister participant"
-                    >
-                      &times;
-                    </button>
-                  </li>
-                `
-              )
-              .join("")
-          : '<li class="participants-empty">No participants yet</li>';
+        const participantsMarkup =
+          participantCount > 0
+            ? `<li class="participants-summary">${participantCount} participant${participantCount === 1 ? "" : "s"} registered</li>`
+            : '<li class="participants-empty">No participants yet</li>';
 
         activityCard.innerHTML = `
           <h4>${safeName}</h4>
